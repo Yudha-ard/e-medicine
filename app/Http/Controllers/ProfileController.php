@@ -7,7 +7,6 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 class ProfileController extends Controller
 {
@@ -26,19 +25,19 @@ class ProfileController extends Controller
     {
         $users = Auth::user();
 
-        if (!$users && !$users->role == 0) {
+        if (!$users && $users->role === 'customer') {
         
             return redirect()->route('customer.profile');
         
-        } elseif (!$users && !$users->role == 1) {
+        } elseif (!$users && $users->role === 'administrator') {
 
             return redirect()->route('admin.profile');
             
-        } elseif (!$users && !$users->role == 2) {
+        } elseif (!$users && $users->role === 'apoteker') {
 
             return redirect()->route('apoteker.profile');
             
-        } elseif (!$users && !$users->role == 3) {
+        } elseif (!$users && $users->role === 'kurir') {
 
             return redirect()->route('kurir.profile');
             
@@ -59,29 +58,44 @@ class ProfileController extends Controller
         ];
 
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|string',
             'email' => 'required|email',
-            'password' => 'required',
-            'img_profile' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'password' => 'required|string',
+            'img_profile' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'address' => 'required|string|min:10|max:100',
+            'phone' => 'required|numeric|min:1000000000',
         ], $messages);
 
         $users = User::find(Auth::user()->id);
 
-        if (!$users) {
-            if ($users->is_admin == 0) {
-                return redirect()->route('user.profile');
-            } elseif ($users->is_admin == 1) {
-                return redirect()->route('admin.profile');
-            }
+        if (!$users && $users->role === 'customer') {
+        
+            return redirect()->route('customer.profile');
+        
+        } elseif (!$users && $users->role === 'administrator') {
+
+            return redirect()->route('admin.profile');
+            
+        } elseif (!$users && $users->role === 'apoteker') {
+
+            return redirect()->route('apoteker.profile');
+            
+        } elseif (!$users && $users->role === 'kurir') {
+
+            return redirect()->route('kurir.profile');
+            
         }
 
         if ($request->hasFile('img_profile')) {
             $image = $request->file('img_profile');
-            $extension = $image->getClientOriginalExtension();
-            $imageName = uniqid() . '_' . time() . '.' . $extension;
-            $imagePath = 'images/user/' . $imageName;
-            $image->storeAs('public/'. $imagePath);
-            $fileName = $imageName;
+            $imageName = uniqid() . '_' . time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public/images/user', $imageName);
+            $oldImg = $users->img_profile;
+            $users->img_profile = $imageName;
+
+            if (!empty($oldImg)) {
+                Storage::disk('public')->delete('images/user/' . $oldImg);
+            }
         }
 
         $Pass = $users->password;
@@ -93,25 +107,28 @@ class ProfileController extends Controller
         if ($PassNew !== $Pass) {
             $users->password = Hash::make($PassNew);
         }
-        
-        $oldImg = $users->img_profile;
-        $users->img_profile = $imageName;
 
-        $fileName = pathinfo($imageName, PATHINFO_BASENAME);
-        $users->img_profile = $fileName;
+        $users->address = $request->address;
+        $users->phone = $request->phone;
 
         $users->save();
 
-        if (!empty($oldImg)) {
-            Storage::disk('public')->delete('images/user/' . $oldImg);
-        }
-
-        if ($users->is_admin == 0) {
+        if ($users && $users->role === 'customer') {
             Alert::success('sukses', 'Sukses Update Data Profile !');
-            return redirect()->route('user.profile');
-        } elseif ($users->is_admin == 1) {
-            Alert::success('sukses', 'Sukses Update Data Profile!');
+            return redirect()->route('customer.profile');
+        
+        } elseif ($users && $users->role === 'administrator') {
+            Alert::success('sukses', 'Sukses Update Data Profile !');
             return redirect()->route('admin.profile');
+            
+        } elseif ($users && $users->role === 'apoteker') {
+            Alert::success('sukses', 'Sukses Update Data Profile !');
+            return redirect()->route('apoteker.profile');
+            
+        } elseif ($users && $users->role === 'kurir') {
+            Alert::success('sukses', 'Sukses Update Data Profile !');
+            return redirect()->route('kurir.profile');
+            
         }
     }
 

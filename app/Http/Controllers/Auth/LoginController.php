@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
+use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -32,18 +33,26 @@ class LoginController extends Controller
     {
         $role = auth()->user()->role;
 
+        $dashboard = '';
         switch ($role) {
             case 'administrator':
-                return '/admin/dashboard';
+                $dashboard = '/admin/dashboard';
+                break;
             case 'kurir':
-                return '/kurir/dashboard';
+                $dashboard = '/kurir/dashboard';
+                break;
             case 'customer':
-                return '/user/dashboard';
+                $dashboard = '/user/dashboard';
+                break;
             case 'apoteker':
-                return '/apotek/dashboard';
+                $dashboard = '/apotek/dashboard';
+                break;
             default:
-                return '/';
+                $dashboard = '/';
         }
+
+        Alert::success('Success', 'Login Sukses !');
+        return $dashboard;
     }
 
     /**

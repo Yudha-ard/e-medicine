@@ -16,16 +16,14 @@ return new class extends Migration
             $table->timestamp('tgl_transaksi');
             $table->string('no_transaksi');
             $table->enum('pembayaran',['Bank', 'Tunai','E-Wallet']);
-            $table->bigInteger('apoteker')->unsigned();
-            $table->foreign('apoteker')->references('id')->on('users')->onDelete('cascade');
-            $table->bigInteger('kurir')->unsigned();
-            $table->foreign('kurir')->references('id')->on('users')->onDelete('cascade');
+            $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('apotek_id')->unsigned()->nullable();
-            $table->foreign('apotek_id')->references('id')->on('apotek')->onDelete('cascade');
             $table->bigInteger('total');
             $table->bigInteger('paid');
-            $table->enum('status',['Done','On Process','Delivered','Cancel']);
+            $table->enum('status',['Done','Accept','On Process','Delivered','Cancel','Pending']);
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('apotek_id')->references('id')->on('apotek')->onDelete('cascade');
         });
     }
 

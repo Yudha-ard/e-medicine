@@ -113,98 +113,105 @@
 
                             @if(Auth::user()->role === 'administrator')
                                 <li>
-                                    <a href="javascript: void(0);" class="waves-effect">
+                                    <a href="{{ route('admin.apotek') }}" class="waves-effect">
                                         <i class="bx bx-detail"></i>
                                         <span key="t-blog">Apotek</span>
                                     </a>
                                 </li>
 
                                 <li>
-                                    <a href="javascript: void(0);" class="waves-effect">
+                                    <a href="{{ route('admin.transaksi') }}" class="waves-effect">
+                                        <i class="bx bx-detail"></i>
+                                        <span key="t-blog">Transaksi</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="{{ route('admin.riwayat') }}" class="waves-effect">
                                         <i class="bx bx-detail"></i>
                                         <span key="t-blog">Riwayat</span>
                                     </a>
                                 </li>
 
                                 <li>
-                                    <a href="javascript: void(0);" class="waves-effect">
+                                    <a href="{{ route('admin.user') }}" class="waves-effect">
                                         <i class="bx bx-detail"></i>
                                         <span key="t-blog">User</span>
                                     </a>
                                 </li>
                             @elseif(Auth::user()->role === 'apoteker')
                                 <li>
-                                    <a href="javascript: void(0);" class="waves-effect">
+                                    <a href="{{ route('apoteker.obat') }}" class="waves-effect">
                                         <i class="bx bx-detail"></i>
                                         <span key="t-blog">Obat</span>
                                     </a>
                                 </li>
 
                                 <li>
-                                    <a href="javascript: void(0);" class="waves-effect">
+                                    <a href="{{ route('apoteker.kategori') }}" class="waves-effect">
                                         <i class="bx bx-detail"></i>
                                         <span key="t-blog">Kategori</span>
                                     </a>
                                 </li>
 
                                 <li>
-                                    <a href="javascript: void(0);" class="waves-effect">
+                                    <a href="{{ route('apoteker.order') }}" class="waves-effect">
                                         <i class="bx bx-detail"></i>
                                         <span key="t-blog">Order</span>
                                     </a>
                                 </li>
 
                                 <li>
-                                    <a href="javascript: void(0);" class="waves-effect">
+                                    <a href="{{ route('apoteker.transaksi') }}" class="waves-effect">
                                         <i class="bx bx-detail"></i>
                                         <span key="t-blog">Transaksi</span>
                                     </a>
                                 </li>
 
                                 <li>
-                                    <a href="javascript: void(0);" class="waves-effect">
+                                    <a href="{{ route('apoteker.riwayat') }}" class="waves-effect">
                                         <i class="bx bx-detail"></i>
                                         <span key="t-blog">Riwayat</span>
                                     </a>
                                 </li>
                             @elseif(Auth::user()->role === 'kurir')
                                 <li>
-                                    <a href="javascript: void(0);" class="waves-effect">
+                                    <a href="{{ route('kurir.order') }}" class="waves-effect">
                                         <i class="bx bx-detail"></i>
                                         <span key="t-blog">Order</span>
                                     </a>
                                 </li>
 
                                 <li>
-                                    <a href="javascript: void(0);" class="waves-effect">
+                                    <a href="{{ route('kurir.riwayat') }}" class="waves-effect">
                                         <i class="bx bx-detail"></i>
                                         <span key="t-blog">Riwayat</span>
                                     </a>
                                 </li>
                             @elseif(Auth::user()->role === 'customer')
                                 <li>
-                                    <a href="javascript: void(0);" class="waves-effect">
+                                    <a href="{{ route('customer.apotek') }}" class="waves-effect">
                                         <i class="bx bx-detail"></i>
                                         <span key="t-blog">Apotek</span>
                                     </a>
                                 </li>
 
                                 <li>
-                                    <a href="javascript: void(0);" class="waves-effect">
+                                    <a href="{{ route('customer.order') }}" class="waves-effect">
                                         <i class="bx bx-detail"></i>
                                         <span key="t-blog">Order</span>
                                     </a>
                                 </li>
 
                                 <li>
-                                    <a href="javascript: void(0);" class="waves-effect">
+                                    <a href="{{ route('customer.transaksi') }}" class="waves-effect">
                                         <i class="bx bx-detail"></i>
                                         <span key="t-blog">Transaksi</span>
                                     </a>
                                 </li>
 
                                 <li>
-                                    <a href="javascript: void(0);" class="waves-effect">
+                                    <a href="{{ route('customer.riwayat') }}" class="waves-effect">
                                         <i class="bx bx-detail"></i>
                                         <span key="t-blog">Riwayat</span>
                                     </a>

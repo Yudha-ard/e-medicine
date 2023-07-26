@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
-use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class RegisterController extends Controller
 {
@@ -56,6 +57,8 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'address' => ['required', 'string', 'min:10', 'max:100'],
+            'phone' => ['required', 'numeric', 'min:1000000000'],
         ]);
     }
 
@@ -71,6 +74,8 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'email_verified_at' => now(),
+            'address' => $data['address'],
+            'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
             'remember_token' => Str::random(10),
         ]);
@@ -83,6 +88,7 @@ class RegisterController extends Controller
         
         $user = $this->create($request->all());
 
-        return redirect()->route('login')->with('success', 'Registration successful! Please log in.');
+        Alert::success('sukses', 'Registrasi Sukses ! Silahkan Login');
+        return redirect()->route('login');
     }
 }

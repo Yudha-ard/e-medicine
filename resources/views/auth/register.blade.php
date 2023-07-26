@@ -20,7 +20,7 @@
     </head>
 
     <body>
-        
+    @include('sweetalert::alert')
         <div class="account-pages my-5 pt-sm-5">
             <div class="container">
                 <div class="row justify-content-center">
@@ -74,6 +74,32 @@
                                             @if ($errors->has('email'))
                                                 <div class="text-danger">
                                                     {{ $errors->first('email') }}
+                                                </div>
+                                            @endif    
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="address" class="form-label">Address</label>
+                                            <textarea rows="10" type="text" class="form-control" id="address" name="address" placeholder="Enter Address" required>{{ old('address') }}</textarea>  
+                                            <div class="invalid-feedback">
+                                                Please Enter Address
+                                            </div>
+                                            @if ($errors->has('address'))
+                                                <div class="text-danger">
+                                                    {{ $errors->first('address') }}
+                                                </div>
+                                            @endif    
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="phone" class="form-label">Phone</label>
+                                            <input type="number" class="form-control" id="phone" name="phone" placeholder="Enter phone number" value="{{ old('phone') }}" required>  
+                                            <div class="invalid-feedback">
+                                                Please Enter Phone Number
+                                            </div>
+                                            @if ($errors->has('phone'))
+                                                <div class="text-danger">
+                                                    {{ $errors->first('phone') }}
                                                 </div>
                                             @endif    
                                         </div>

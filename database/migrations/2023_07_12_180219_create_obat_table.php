@@ -19,12 +19,12 @@ return new class extends Migration
             $table->integer('diskon')->nullable();
             $table->string('img_obat')->default('obat.png')->nullable();
             $table->bigInteger('kategori_id')->unsigned()->nullable();
-            $table->foreign('kategori_id')->references('id')->on('kategori_obat')->onDelete('cascade');
             $table->bigInteger('apotek_id')->unsigned()->nullable();
-            $table->foreign('apotek_id')->references('id')->on('apotek')->onDelete('cascade');
             $table->enum('status',['Tersedia','Habis']);	
             $table->text('deskripsi')->nullable();
             $table->timestamps();
+            $table->foreign('kategori_id')->references('id')->on('kategori_obat')->onDelete('cascade');
+            $table->foreign('apotek_id')->references('id')->on('apotek')->onDelete('cascade');
         });
     }
 

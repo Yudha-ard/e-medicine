@@ -23,9 +23,9 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->enum('status',['active','inactive']);
             $table->bigInteger('apotek_id')->unsigned()->nullable();
-            $table->foreign('apotek_id')->references('id')->on('apotek');
             $table->rememberToken();
             $table->timestamps();
+            $table->foreign('apotek_id')->references('id')->on('apotek');
         });
     }
 
