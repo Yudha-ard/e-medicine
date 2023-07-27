@@ -19,7 +19,7 @@
 
     </head>
 
-    <body>
+    <body style="background: radial-gradient(circle at 0% 120%, rgba(47, 85, 212, 0.1) 0%, rgba(47, 85, 212, 0.1) 33.333%, rgba(47, 85, 212, 0.3) 33.333%, rgba(47, 85, 212, 0.3) 66.666%, rgba(47, 85, 212, 0.5) 66.666%, rgba(47, 85, 212, 0.5) 99.999%)">
     @include('sweetalert::alert')
         <div class="account-pages my-5 pt-sm-5">
             <div class="container">
@@ -80,7 +80,7 @@
 
                                         <div class="mb-3">
                                             <label for="address" class="form-label">Address</label>
-                                            <textarea rows="10" type="text" class="form-control" id="address" name="address" placeholder="Enter Address" required>{{ old('address') }}</textarea>  
+                                            <textarea rows="5" type="text" class="form-control" id="address" name="address" placeholder="Enter Address" required>{{ old('address') }}</textarea>  
                                             <div class="invalid-feedback">
                                                 Please Enter Address
                                             </div>

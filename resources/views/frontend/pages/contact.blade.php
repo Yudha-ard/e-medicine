@@ -3,24 +3,58 @@
 @section('title', 'Contact')
 
 @section('content')
-<section class="bg-half-170 d-table w-100">
+<section class="bg-half bg-light d-table w-100">
     <div class="container">
-        <div class="row mt-5 align-items-center">
-            <div class="col-lg-7 col-md-7">
-                <div class="title-heading me-lg-4">
-                    <h1 class="heading mb-3">Our Creativity Is Your <span class="text-primary">Success</span> </h1>
-                    <p class="para-desc text-muted">Launch your campaign and benefit from our expertise on designing and managing conversion centered bootstrap v5 html page.</p>
-                    <div class="mt-4">
-                        <a href="page-contact-one.html" class="btn btn-primary mt-2 me-2"><i class="uil uil-envelope"></i> Get Started</a>
-                        <a href="documentation.html" class="btn btn-outline-primary mt-2"><i class="uil uil-book-alt"></i> Documentation</a>
+        <div class="row justify-content-center">
+            <div class="col-lg-12 text-center">
+                <div class="page-next-level">
+                    <h4 class="title">Contact Us</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section bg-half-170 d-table w-100 home-wrapper overflow-hidden">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card border-0 text-center features feature-clean">
+                    <div class="icons text-primary text-center mx-auto">
+                        <i class="uil uil-phone d-block rounded h3 mb-0"></i>
+                    </div>
+                    <div class="content mt-3">
+                        <h5 class="font-weight-bold">Phone</h5>
+                        <p class="text-muted">Start working with E-Medicine that can provide everything</p>
+                        <a href="{{ url('https://wa.me/628113278005') }}" class="text-primary">0811-3278-005</a>
                     </div>
                 </div>
-            </div><!--end col-->
-
-            <div class="col-lg-5 col-md-5 mt-4 pt-2 mt-sm-0 pt-sm-0">
-                <img src="{{ URL::asset('frontend/assets/images/Startup_SVG.svg') }}" alt="">
-            </div><!--end col-->
-        </div><!--end row-->
-    </div><!--end container-->
-</section><!--end section-->
+            </div>
+            <div class="col-md-4 mt-4 mt-sm-0 pt-2 pt-sm-0">
+                <div class="card border-0 text-center features feature-clean">
+                    <div class="icons text-primary text-center mx-auto">
+                        <i class="uil uil-envelope d-block rounded h3 mb-0"></i>
+                    </div>
+                    <div class="content mt-3">
+                        <h5 class="font-weight-bold">Email</h5>
+                        <p class="text-muted">Start working with E-Medicine that can provide everything</p>
+                        <a href="mailto:call@e-medicine.com" class="text-primary">call@e-medicine.com</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mt-4 mt-sm-0 pt-2 pt-sm-0">
+                <div class="card border-0 text-center features feature-clean">
+                    <div class="icons text-primary text-center mx-auto">
+                        <i class="uil uil-map-marker d-block rounded h3 mb-0"></i>
+                    </div>
+                    <div class="content mt-3">
+                        <h5 class="font-weight-bold">Location</h5>
+                        <p class="text-muted">Jl. Ketintang No.156, Ketintang, Kec. Gayungan, <br>Surabaya, Jawa Timur 60231</p>
+                        <a href="https://www.google.com/maps/place/Institut+Teknologi+Telkom+Surabaya/@-7.3105061,112.7286602,15z/data=!4m2!3m1!1s0x0:0x1dbecb0b2e9b059f?sa=X&ved=2ahUKEwjM6sXUuK6AAxXEwjgGHYFmCr4Q_BJ6BAhlEAA&ved=2ahUKEwjM6sXUuK6AAxXEwjgGHYFmCr4Q_BJ6BAhxEAg"
+                            class="video-play-icon h6 text-primary">View on Google map</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 @stop

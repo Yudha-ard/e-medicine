@@ -20,7 +20,7 @@
 
     </head>
 
-    <body>
+    <body style="background: radial-gradient(circle at 0% 120%, rgba(47, 85, 212, 0.1) 0%, rgba(47, 85, 212, 0.1) 33.333%, rgba(47, 85, 212, 0.3) 33.333%, rgba(47, 85, 212, 0.3) 66.666%, rgba(47, 85, 212, 0.5) 66.666%, rgba(47, 85, 212, 0.5) 99.999%)">
     @include('sweetalert::alert')
         <div class="account-pages my-5 pt-sm-5">
             <div class="container">
@@ -42,14 +42,6 @@
                             </div>
                             <div class="card-body pt-0"> 
                                 <div class="auth-logo">
-                                    <a class="auth-logo-light">
-                                        <div class="avatar-md profile-user-wid mb-4">
-                                            <span class="avatar-title rounded-circle bg-light">
-                                                <img src="{{ URL::asset('backend/assets/images/logo-light.svg') }}" alt="" class="rounded-circle" height="34">
-                                            </span>
-                                        </div>
-                                    </a>
-
                                     <a class="auth-logo-dark">
                                         <div class="avatar-md profile-user-wid mb-4">
                                             <span class="avatar-title rounded-circle bg-light">
@@ -113,8 +105,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="mt-5 text-center">
-    
+                        <div class="mt-5 text-center text-primary text-bold">
                             <div>
                                 <p>{{ env('APP_NAME') }} © <script>document.write(new Date().getFullYear())</script></br>
                                 Made with <i class="mdi mdi-heart text-danger"></i> by Kelompok 1</p>

@@ -9,18 +9,30 @@
         <meta name="keywords" content="E-Medicine">
         <meta name="author" content="Kelompok-1">
 
-        <!-- favicon -->
-        <link rel="shortcut icon" href="{{ URL::asset('frontend/assets/images/favicon.ico') }}">
+        <link rel="shortcut icon" href="{{ URL::asset('frontend/assets/images/logo-dark.png') }}">
 
-        <!-- Css -->
+        <link rel="stylesheet" href="{{ url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css') }}">
         <link href="{{ URL::asset('frontend/assets/css/tiny-slider.css') }}" rel="stylesheet">
-        <!-- Bootstrap Css -->
         <link href="{{ URL::asset('frontend/assets/css/bootstrap.min.css') }}" id="bootstrap-style" class="theme-opt" rel="stylesheet" type="text/css">
-        <!-- Icons Css -->
         <link href="{{ URL::asset('frontend/assets/css/materialdesignicons.min.css') }}" rel="stylesheet" type="text/css">
-        <link href="{{ URL::asset('frontend/assets/css/line.css') }}" type="text/css" rel="stylesheet">
-        <!-- Style Css-->
+        <link href="{{ url('https://unicons.iconscout.com/release/v4.0.0/css/line.css') }}" type="text/css" rel="stylesheet">
         <link href="{{ URL::asset('frontend/assets/css/style.min.css') }}" id="color-opt" class="theme-opt" rel="stylesheet" type="text/css">
+        <style type="text/css">
+            @-webkit-keyframes mover {
+                0% { transform: translateY(0); }
+                100% { transform: translateY(-20px); }
+            }
+            @keyframes mover {
+                0% { transform: translateY(0); }
+                100% { transform: translateY(-20px); }
+            }
+
+            .moving-object {
+                position: relative;
+                -webkit-animation: mover 2s infinite  alternate;
+                animation: mover 2s infinite  alternate;
+            }
+        </style>
     </head>
 
     <body>
@@ -42,8 +54,7 @@
             <div class="container">
                 <!-- Logo container-->
                 <a class="logo" href="index.html">
-                    <img src="{{ URL::asset('frontend/assets/images/logo-dark.png') }}" height="24" class="logo-light-mode" alt="">
-                    <img src="{{ URL::asset('frontend/assets/images/logo-light.png') }}" height="24" class="logo-dark-mode" alt="">
+                    <img src="{{ URL::asset('frontend/assets/images/logo-dark.png') }}" height="60" class="logo-light-mode" alt="">
                 </a>                
                 <!-- Logo End -->
 
@@ -65,9 +76,24 @@
                 <!--Login button Start-->
                 <ul class="buy-button list-inline mb-0">
                     <li class="list-inline-item mb-0">
-                        <a href="javascript:void(0)" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-                            <div class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="settings" class="fea icon-sm"></i></div>
+                    @auth
+                        @php
+                            $userType = auth()->user()->role;
+                        @endphp
+                        <a href="{{ $userType === 'administrator' ? route('admin.dashboard') :
+                                    ($userType === 'apoteker' ? route('apoteker.dashboard') :
+                                    ($userType === 'kurir' ? route('kurir.dashboard') : route('customer.dashboard'))) }}"
+                            class="btn btn-pills btn btn-soft-primary text-small">
+                            <i class="uil uil-home"></i> Dashboard
                         </a>
+                        @else
+                        <a href="{{ route('login') }}" class="btn btn-md m-1 btn-pills btn btn-soft-primary text-small">
+                            <i class="uil uil-sign-in-alt"></i> Sign In
+                        </a>
+                        <a href="{{ route('register') }}" class="btn btn-md m-1 btn-pills btn btn-soft-info text-small">
+                            <i class="uil uil-user-plus"></i> Sign Up
+                        </a>
+                        @endauth
                     </li>
             
                 </ul>

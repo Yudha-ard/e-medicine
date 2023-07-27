@@ -3,24 +3,36 @@
 @section('title', 'Home')
 
 @section('content')
-<section class="bg-half-170 d-table w-100">
+<section class="bg-half-170 d-table w-100 home-wrapper overflow-hidden">
     <div class="container">
-        <div class="row mt-5 align-items-center">
-            <div class="col-lg-7 col-md-7">
-                <div class="title-heading me-lg-4">
-                    <h1 class="heading mb-3">Our Creativity Is Your <span class="text-primary">Success</span> </h1>
-                    <p class="para-desc text-muted">Launch your campaign and benefit from our expertise on designing and managing conversion centered bootstrap v5 html page.</p>
-                    <div class="mt-4">
-                        <a href="page-contact-one.html" class="btn btn-primary mt-2 me-2"><i class="uil uil-envelope"></i> Get Started</a>
-                        <a href="documentation.html" class="btn btn-outline-primary mt-2"><i class="uil uil-book-alt"></i> Documentation</a>
+        <div class="row align-items-center">
+            <div class="col-lg-6 col-md-6">
+                <div class="title-heading mb-3">
+                    <span class="badge badge-pill badge-soft-primary"><b>Medical</b></span>
+                    <h4 class="heading my-3">Welcome to</br>
+                        <span class="text-primary">E-Medicine</span>
+                    </h4>
+                    <p class="para-desc text-muted mb-5 mt-3">
+                        adalah platform revolusioner yang memudahkan Anda untuk memesan obat secara online kapan pun dan di mana pun Anda berada.
+                        Dengan fitur pemesanan obat 24 jam, Anda tidak perlu lagi khawatir tentang ketersediaan obat atau batasan waktu.
+                    </p>
+                    <div class="mt-3">
+                        <a href="{{ route('frontend.about') }}" class="btn btn-primary mr-2 mt-2">About Us</a>
+                        <a href="{{ route('login') }}" class="btn btn-soft-primary mt-2">Get Started</a>
                     </div>
+                    <p class="text-muted mb-0 mt-3">Don't have an account yet?
+                        <a href="{{ route('register') }}" class="text-primary ml-2 h6 mb-0">
+                            Signup <i data-feather="arrow-right" class="fea icon-sm"></i>
+                        </a>
+                    </p>
                 </div>
-            </div><!--end col-->
-
-            <div class="col-lg-5 col-md-5 mt-4 pt-2 mt-sm-0 pt-sm-0">
-                <img src="{{ URL::asset('frontend/assets/images/Startup_SVG.svg') }}" alt="">
-            </div><!--end col-->
-        </div><!--end row-->
-    </div><!--end container-->
-</section><!--end section-->
+            </div>
+            <div class="col-lg-6 col-md-6 mt-4 pt-2 mt-sm-0 pt-sm-0">
+                <div class="ml-lg-4">
+                    <img src="{{ URL::asset('frontend/assets/images/capsul.png') }}" class="img-fluid moving-object" alt="" style="">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 @stop
