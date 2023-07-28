@@ -13,7 +13,7 @@ use App\Http\Controllers\RiwayatController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
-
+use App\Http\Controllers\ExcelExportController;
 
 
 Route::get('/', [FrontController::class, 'index'])->name('frontend.index');
@@ -53,6 +53,9 @@ Route::prefix('user')->middleware(['auth', 'role:customer'])->group(function () 
     Route::get('riwayat', [RiwayatController::class, 'index'])->name('customer.riwayat');
     Route::get('riwayat/{riwayat}', [RiwayatController::class, 'show'])->name('customer.riwayat.show');
 
+    Route::get('/transaksiExport', [ExcelExportController::class, 'exportTransaksiCustomer'])->name('customer.transaksi.export');
+    Route::get('/riwayatExport', [ExcelExportController::class, 'exportRiwayatCustomer'])->name('customer.riwayat.export');
+
 });
 
 Route::prefix('admin')->middleware(['auth', 'role:administrator'])->group(function () {
@@ -84,6 +87,9 @@ Route::prefix('admin')->middleware(['auth', 'role:administrator'])->group(functi
 
     Route::get('riwayat', [RiwayatController::class, 'indexAdmin'])->name('admin.riwayat');
     Route::get('riwayat/{riwayat}', [RiwayatController::class, 'showAdmin'])->name('admin.riwayat.show');
+
+    Route::get('/riwayatExport', [ExcelExportController::class, 'exportRiwayatAdmin'])->name('admin.riwayat.export');
+    Route::get('/transaksiExport', [ExcelExportController::class, 'exportTransaksiAdmin'])->name('admin.transaksi.export');
     
 });
 
@@ -122,6 +128,10 @@ Route::prefix('apotek')->middleware(['auth', 'role:apoteker'])->group(function (
 
     Route::get('riwayat', [RiwayatController::class, 'indexApotek'])->name('apoteker.riwayat');
     Route::get('riwayat/{riwayat}', [RiwayatController::class, 'showApotek'])->name('apoteker.riwayat.show');
+
+    Route::get('/orderExport', [ExcelExportController::class, 'exportOrderApotek'])->name('apoteker.order.export');
+    Route::get('/riwayatExport', [ExcelExportController::class, 'exportRiwayatApotek'])->name('apoteker.riwayat.export');
+    Route::get('/transaksiExport', [ExcelExportController::class, 'exportTransaksiApotek'])->name('apoteker.transaksi.export');
 });
 
 Route::prefix('kurir')->middleware(['auth', 'role:kurir'])->group(function () {
@@ -138,4 +148,8 @@ Route::prefix('kurir')->middleware(['auth', 'role:kurir'])->group(function () {
 
     Route::get('riwayat', [RiwayatController::class, 'indexKurir'])->name('kurir.riwayat');
     Route::get('riwayat/{riwayat}', [RiwayatController::class, 'showKurir'])->name('kurir.riwayat.show');
+
+    Route::get('/orderExport', [ExcelExportController::class, 'exportOrderKurir'])->name('kurir.order.export');
+    Route::get('/riwayatExport', [ExcelExportController::class, 'exportRiwayatKurir'])->name('kurir.riwayat.export');
 });
+

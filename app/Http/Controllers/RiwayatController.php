@@ -3,12 +3,9 @@
 namespace App\Http\Controllers;
 
 use DB;
-use App\Models\Obat;
-use App\Models\Apotek;
 use App\Models\Transaksi;
 use App\Models\DetailTransaksi;
 use RealRashid\SweetAlert\Facades\Alert;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class RiwayatController extends Controller

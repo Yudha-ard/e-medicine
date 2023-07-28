@@ -166,9 +166,26 @@
                                 <script>document.write(new Date().getFullYear())</script>
                             </span>
                         </div>
+                        <button class="btn btn-primary m-3" onclick="printInvoice()">Print</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+    function printInvoice() {
+        var contentToPrint = document.querySelector('.invoice').outerHTML;
+
+        var printWindow = window.open(' ', '_blank');
+        printWindow.document.open();
+
+        printWindow.document.write('<html><head><title>Print Invoice E-Medicine</title></head><body>' + contentToPrint + '</body></html>');
+
+        printWindow.document.close();
+
+        printWindow.print();
+        printWindow.close();
+    }
+</script>
+@stop

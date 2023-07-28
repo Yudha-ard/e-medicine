@@ -45,7 +45,7 @@
                 ];
             @endphp
             <div class="card">
-                <div class="card-body">
+                <div class="card-body invoice">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="d-flex justify-content-start mb-3">
@@ -130,8 +130,30 @@
                         </table>
                     </div>
                 </div>
+                <div class="container">
+                    <div class="row justify-content-end">
+                        <div class="col-auto">
+                            <button class="btn btn-primary m-3" onclick="printInvoice()"><i class='bx bx-printer'></i> Print</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-@endsection
+<script>
+    function printInvoice() {
+        var contentToPrint = document.querySelector('.invoice').outerHTML;
+
+        var printWindow = window.open(' ', '_blank');
+        printWindow.document.open();
+
+        printWindow.document.write('<html><head><title>Print Invoice E-Medicine</title></head><body>' + contentToPrint + '</body></html>');
+
+        printWindow.document.close();
+
+        printWindow.print();
+        printWindow.close();
+    }
+</script>
+@stop

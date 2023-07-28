@@ -106,17 +106,17 @@
                                             <td>{!! substr($user->address, 0, 50) . '...' !!}</td>
                                             <td>
                                                 <ul class="list-inline font-size-20 contact-links mb-0">
-                                                    <li class="list-inline-item px-2">
-                                                        <a href="{{ route('admin.user.edit', $user->id) }}" class="btn btn-warning" title="Edit">
-                                                            <i class="bx bx-edit"></i>
+                                                    <li class="list-inline-item">
+                                                        <a href="{{ route('admin.user.edit', $user->id) }}" class="btn btn-warning btn-sm text-white" title="Edit">
+                                                            <i class="bx bx-edit"></i> Edit
                                                         </a>
                                                     </li>
-                                                    <li class="list-inline-item px-2">
+                                                    <li class="list-inline-item">
                                                         <form id="delete-form-{{ $user->id }}" action="{{ route('admin.user.destroy', $user->id) }}" method="POST"  style="display: inline-block;">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit" class="btn btn-danger delete-button" data-id="{{ $user->id }}" title="Hapus">
-                                                                <i class="bx bx-trash"></i>
+                                                            <button type="submit" class="btn btn-danger text-white btn-sm delete-button" data-id="{{ $user->id }}" title="Hapus">
+                                                                <i class="bx bx-trash"></i> Hapus
                                                             </button>
                                                         </form>
                                                     </li>

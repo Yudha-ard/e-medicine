@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\KategoriObat;
 use App\Models\Obat;
-use App\Models\Apotek;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;

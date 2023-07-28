@@ -44,8 +44,9 @@
                     'Pending' => 'badge-soft-warning',
                 ];
             @endphp
-            <div class="card">
+            <div class="card invoice">
                 <div class="card-body">
+                    
                     <div class="row">
                         <div class="col-md-6">
                             <div class="d-flex justify-content-start mb-3">
@@ -53,7 +54,7 @@
                             </div>
                         </div>
                     </div>
-
+                    
                         <div class="row mb-1">
                             <div class="col-md-4 text-dark">
                                 <strong>Apotek</strong> : {{ $transaksis->apotek->name }}
@@ -155,6 +156,7 @@
                                     </button>
                                 </form>
                                 @endif
+                                <button class="btn btn-primary m-3" onclick="printInvoice()"><i class='bx bx-printer'></i> Print</button>
                             </li>
                         </div>
                     </form>
@@ -163,4 +165,19 @@
         </div>
     </div>
 </div>
-@endsection
+<script>
+    function printInvoice() {
+        var contentToPrint = document.querySelector('.invoice').outerHTML;
+
+        var printWindow = window.open(' ', '_blank');
+        printWindow.document.open();
+
+        printWindow.document.write('<html><head><title>Print Invoice E-Medicine</title></head><body>' + contentToPrint + '</body></html>');
+
+        printWindow.document.close();
+
+        printWindow.print();
+        printWindow.close();
+    }
+</script>
+@stop

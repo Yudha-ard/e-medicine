@@ -9,7 +9,7 @@
         <meta content="E-Medicine" name="description" />
         <meta content="Kelompok-1" name="author" />
         <!-- App favicon -->
-        <link rel="shortcut icon" href="{{ URL::asset('backend/assets/images/favicon.ico') }}">
+        <link rel="shortcut icon" href="{{ URL::asset('frontend/assets/images/logo-dark.png') }}">
 
         <!-- Bootstrap Css -->
         <link href="{{ URL::asset('backend/assets/css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet" type="text/css" />
@@ -17,7 +17,7 @@
         <link href="{{ URL::asset('backend/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
         <!-- App Css-->
         <link href="{{ URL::asset('backend/assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
- 
+        <script src="{{ URL::asset('backend/assets/js/pages/apexcharts.js') }}"></script>
     </head>
 
     <!-- <body data-sidebar="dark" data-layout-mode="dark"> -->
@@ -35,10 +35,10 @@
                         <div class="navbar-brand-box">
                             <a class="logo logo-light">
                                 <span class="logo-sm">
-                                    <img src="{{ URL::asset('backend/assets/images/logo-dark.png') }}" alt="" height="22">
+                                    <img src="{{ URL::asset('backend/assets/images/logo-dark-mini.png') }}" alt="" height="20">
                                 </span>
                                 <span class="logo-lg">
-                                    <img src="{{ URL::asset('backend/assets/images/logo-dark.png') }}" alt="" height="70">
+                                    <img src="{{ URL::asset('backend/assets/images/logo-dark.png') }}" alt="" height="45">
                                 </span>
                             </a>
                         </div>

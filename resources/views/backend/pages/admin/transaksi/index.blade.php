@@ -25,6 +25,14 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
+                            <div class="actions clearfix d-flex justify-content-end m-2">
+                                <a class="btn btn-success m-1" href="{{ route('admin.transaksi.export') }}" role="menuitem">
+                                    <i class='bx bx-export'></i> Excel
+                                </a>
+                                <a class="btn btn-danger m-1" onclick="printInvoice()" role="menuitem">
+                                    <i class='bx bxs-file-pdf'></i> PDF
+                                </a>
+                            </div>
                             <div class="table-responsive">
                                 <table class="table align-middle table-nowrap table-hover">
                                     <thead class="table-light">
@@ -122,9 +130,22 @@
                                 </div>
                             </div>
                         </div>
-
-        
         </div>
     </div>
 </div>
+<script>
+    function printInvoice() {
+        var contentToPrint = document.querySelector('.table-responsive').outerHTML;
+
+        var printWindow = window.open(' ', '_blank');
+        printWindow.document.open();
+
+        printWindow.document.write('<html><head><title>Print Invoice E-Medicine</title></head><body>' + contentToPrint + '</body></html>');
+
+        printWindow.document.close();
+
+        printWindow.print();
+        printWindow.close();
+    }
+</script>
 @stop

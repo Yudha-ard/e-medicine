@@ -25,6 +25,14 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
+                            <div class="actions clearfix d-flex justify-content-end m-2">
+                                <a class="btn btn-success m-1" href="{{ route('apoteker.transaksi.export') }}" role="menuitem">
+                                    <i class='bx bx-export'></i> Excel
+                                </a>
+                                <a class="btn btn-danger m-1" onclick="printInvoice()" role="menuitem">
+                                    <i class='bx bxs-file-pdf'></i> PDF
+                                </a>
+                            </div>
                             <div class="table-responsive">
                                 <table class="table align-middle table-nowrap table-hover">
                                     <thead class="table-light">
@@ -77,8 +85,8 @@
                                                 <td>
                                                     <ul class="list-inline font-size-20 contact-links mb-0">
                                                         <li class="list-inline-item px-2">
-                                                            <a href="{{ route('apoteker.transaksi.show', $transaksi->id) }}" class="btn btn-info" title="Detail">
-                                                                <i class="bx bx-show"></i>
+                                                            <a href="{{ route('apoteker.transaksi.show', $transaksi->id) }}" class="btn btn-sm btn-primary text-white" title="Detail">
+                                                                <i class="bx bx-show"></i> Detail
                                                             </a>
                                                         </li>
                                                     </ul>
@@ -117,4 +125,19 @@
         </div>
     </div>
 </div>
-@endsection
+<script>
+    function printInvoice() {
+        var contentToPrint = document.querySelector('.table-responsive').outerHTML;
+
+        var printWindow = window.open(' ', '_blank');
+        printWindow.document.open();
+
+        printWindow.document.write('<html><head><title>Print Invoice E-Medicine</title></head><body>' + contentToPrint + '</body></html>');
+
+        printWindow.document.close();
+
+        printWindow.print();
+        printWindow.close();
+    }
+</script>
+@stop

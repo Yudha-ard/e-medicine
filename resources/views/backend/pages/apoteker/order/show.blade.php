@@ -155,6 +155,7 @@
                                     </button>
                                 </form>
                                 @endif
+                                <button class="btn btn-primary m-3" onclick="printInvoice()"><i class='bx bx-printer'></i> Print</button>
                             </li>
                         </div>
                     </form>
@@ -163,4 +164,19 @@
         </div>
     </div>
 </div>
-@endsection
+<script>
+    function printInvoice() {
+        var contentToPrint = document.querySelector('.card-body').outerHTML;
+
+        var printWindow = window.open(' ', '_blank');
+        printWindow.document.open();
+
+        printWindow.document.write('<html><head><title>Print Invoice E-Medicine</title></head><body>' + contentToPrint + '</body></html>');
+
+        printWindow.document.close();
+
+        printWindow.print();
+        printWindow.close();
+    }
+</script>
+@stop
