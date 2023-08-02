@@ -35,7 +35,7 @@ class OrderController extends Controller
     public function apotek($id) {
         $apoteks = Apotek::findOrFail($id);
         $users = Auth::user();
-        $obats = Obat::where('apotek_id', $apoteks->id)->get();
+        $obats = Obat::where('apotek_id', $apoteks->id)->paginate(10);
         $orders = Transaksi::where('user_id', $users->id)->pluck('apotek_id')->toArray();
         return view('backend.pages.customer.order.apotek', compact(['apoteks','orders','obats']));
     }
@@ -49,6 +49,7 @@ class OrderController extends Controller
 
         return view('backend.pages.customer.order.chekout', compact(['date','no_trx','apoteks','transaksis']));
     }
+    
     public function add(Request $request, $id)
     {
         $this->validate($request, [
@@ -58,39 +59,47 @@ class OrderController extends Controller
 
         $apotek = Apotek::findOrFail($id);
         $obat = Obat::findOrFail($request->id_obat);
-    
-        $harga_unit = $obat->harga * $request->qty;
 
-        $cart = session()->get('cart', []);
+        $available_stock = $obat->stock;
+        $input_qty = $request->qty;
 
-        if (count($cart) > 0) {
-            $firstItem = reset($cart);
-            if ($firstItem['apotek_id'] !== $apotek->id) {
-                Alert::error('gagal', 'Anda tidak dapat menambahkan item dari apotek yang berbeda, selesaikan terlebih dahulu pesanannya !');
-                return redirect()->back();
+        if ($input_qty <= $available_stock) {
+            $harga_unit = $obat->harga * $input_qty;
+
+            $cart = session()->get('cart', []);
+
+            if (count($cart) > 0) {
+                $firstItem = reset($cart);
+                if ($firstItem['apotek_id'] !== $apotek->id) {
+                    Alert::error('gagal', 'Anda tidak dapat menambahkan item dari apotek yang berbeda, selesaikan terlebih dahulu pesanannya !');
+                    return redirect()->back();
+                }
             }
-        }
 
-        if (isset($cart[$obat->id])) {
-            $cart[$obat->id]['qty'] += $request->qty;
-            $cart[$obat->id]['total'] += $harga_unit;
+            if (isset($cart[$obat->id])) {
+                $cart[$obat->id]['qty'] += $input_qty;
+                $cart[$obat->id]['total'] += ($harga_unit * $input_qty);
+            } else {
+                $cart[$obat->id] = [
+                    "apotek_id" => $apotek->id,
+                    "apotek_name" => $apotek->name,
+                    "obat_id" => $obat->id,
+                    "name" => $obat->name,
+                    "harga" => $obat->harga,
+                    "diskon" => $obat->diskon,
+                    "qty" => $input_qty,
+                    "total" => ($harga_unit * $input_qty),
+                ];
+            }
+
+            session()->put('cart', $cart);
+
+            Alert::success('sukses', 'Sukses tambah obat di Keranjang!');
+            return redirect()->route('customer.order.apotek', ['apotek' => $id]);
         } else {
-            $cart[$obat->id] = [
-                "apotek_id" => $apotek->id,
-                "apotek_name" => $apotek->name,
-                "obat_id" => $obat->id,
-                "name" => $obat->name,
-                "harga" => $obat->harga,
-                "diskon" => $obat->diskon,
-                "qty" => $request->qty,
-                "total" => $harga_unit,
-            ];
+            Alert::error('gagal', 'Stock Tidak Cukup!');
+            return redirect()->back();
         }
-
-        session()->put('cart', $cart);
-
-        Alert::success('sukses', 'Sukses tambah obat di Keranjang!');
-        return redirect()->route('customer.order.apotek', ['apotek' => $id]);
     }
 
     public function store(Request $request, $id)

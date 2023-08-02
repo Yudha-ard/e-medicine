@@ -110,17 +110,26 @@
                                             </td>
                                             <td>{{ $obat->stock }}</td>
                                             <td>{{ $obat->diskon }} %</td>
+                                            @php
+                                                $cart = session()->get('cart', []);
+                                                $qtyInCart = isset($cart[$obat->id]) ? $cart[$obat->id]['qty'] : 0;
+                                            @endphp
                                             <form action="{{ route('customer.order.apotek.add', ['apotek' => $apoteks->id]) }}" method="POST">
                                             @csrf
                                             <td>
                                                 <input type="hidden" name="id_obat" value="{{ $obat->id }}">
-                                                <input type="number" style="max-width: 80px;" class="form-control input-number" name="qty" value="1" min="1" required>
+                                                <input type="number" style="max-width: 80px;" class="form-control input-number" name="qty" value="0" min="1" required
+                                                @if($qtyInCart >= $obat->stock)
+                                                    disabled
+                                                @endif
+                                            >
                                             </td>
-                                            <td class="text-center">
-                                                <button type="submit" class="btn btn-success">
-                                                    <i class="bx bx-plus"></i> Add
-                                                </button>
-                                            </td>
+                                            
+                                                <td class="text-center">
+                                                    <button type="submit" class="btn btn-success @if($qtyInCart >= $obat->stock) disabled @endif">
+                                                        <i class="bx bx-plus"></i> Add
+                                                    </button>
+                                                </td>   
                                             </form>
                                         </tr>
                                         @endforeach
@@ -131,6 +140,28 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                                            <div class="col-lg-12">
+                                                <ul class="pagination pagination-rounded justify-content-center mt-4">
+                                                    <li class="page-item {{ $obats->currentPage() == 1 ? 'disabled' : '' }}">
+                                                        <a href="{{ $obats->previousPageUrl() }}" class="page-link" aria-label="Previous">
+                                                            <span aria-hidden="true">&laquo;</span>
+                                                        </a>
+                                                    </li>
+                                                    @for ($i = 1; $i <= $obats->lastPage(); $i++)
+                                                        <li class="page-item {{ $i == $obats->currentPage() ? 'active' : '' }}">
+                                                            <a href="{{ $obats->url($i) }}" class="page-link">{{ $i }}</a>
+                                                        </li>
+                                                    @endfor
+                                                    <li class="page-item {{ $obats->currentPage() == $obats->lastPage() ? 'disabled' : '' }}">
+                                                        <a href="{{ $obats->nextPageUrl() }}" class="page-link" aria-label="Next">
+                                                            <span aria-hidden="true">&raquo;</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
             <div class="d-flex justify-content-end mb-3">
                 <a class="m-1" href="{{ route('customer.order.apotek.destroy', $apoteks->id) }}">
                     <button class="btn btn-danger" type="reset">Batalkan</button>
